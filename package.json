@@ -21,7 +21,11 @@
     "getChainInfo": "npx hardhat getChainInfo",
     "getContractAddress": "npx hardhat getContractAddress",
     "callReadMethod": "npx hardhat callReadMethod",
-    "callWriteMethod": "npx hardhat callWriteMethod"
+    "callWriteMethod": "npx hardhat callWriteMethod",
+    "mint": "npx hardhat mint",
+    "lock": "npx hardhat lock",
+    "unlock": "npx hardhat unlock",
+    "transfer": "npx hardhat transfer"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ignition": "^0.15.0",

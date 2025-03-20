@@ -6,7 +6,7 @@ import "./tasks";
 
 dotenv.config();
 
-const { PRIVATE_KEY, BASESCAN_API_KEY } = process.env;
+const { PRIVATE_KEY, BASESCAN_API_KEY, ALCHEMY_API_KEY } = process.env;
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -24,7 +24,7 @@ const config: HardhatUserConfig = {
       allowUnlimitedContractSize: true,
     },
     baseSepolia: {
-      url: "https://sepolia.base.org",
+      url: `https://base-sepolia.g.alchemy.com/v2/${ALCHEMY_API_KEY}`,
       accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
     },
   },

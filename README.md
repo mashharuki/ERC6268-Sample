@@ -42,7 +42,7 @@ ERC6268 調査用のリポジトリ
   bun run test
   ```
 
-- ERC1155WithLockコントラクトをデプロイする
+- ERC1155WithLock コントラクトをデプロイする
 
   ```bash
   bun run deploy:ERC1155WithLockModule --network baseSepolia
@@ -54,6 +54,30 @@ ERC6268 調査用のリポジトリ
   bun run verify chain-<チェーンID>
   ```
 
+- NFT をミント
+
+  ```bash
+  bun run mint --to 0x51908F598A5e0d8F1A3bAbFa6DF76F9704daD072 --id 0 --network baseSepolia
+  ```
+
+- NFT を Lock する
+
+  ```bash
+  bun run lock --id 0 --network baseSepolia
+  ```
+
+- NFT を unLock する
+
+  ```bash
+  bun run unlock --id 0 --network baseSepolia
+  ```
+
+- NFTを移転する。
+
+  ```bash
+  bun run transfer --to 0x1295BDc0C102EB105dC0198fdC193588fe66A1e4 --id 0 --amount 1 --network baseSepolia
+  ```
+
 ## デプロイしたコントラクト
 
 [baseSepolia - 0xfebc75a0e80dc910ee2535c3e11cd6a1f6cfcd1c](https://sepolia.basescan.org/address/0xfebc75a0e80dc910ee2535c3e11cd6a1f6cfcd1c)
@@ -61,4 +85,4 @@ ERC6268 調査用のリポジトリ
 ## 参考文献
 
 - [EIPS6268](https://eips.ethereum.org/EIPS/eip-6268)
-- [[ERC6268] ERC1155形式のNFTをSBTにする仕組みを理解しよう！](https://qiita.com/cardene/items/5ac107681eac3328258d)
+- [[ERC6268] ERC1155 形式の NFT を SBT にする仕組みを理解しよう！](https://qiita.com/cardene/items/5ac107681eac3328258d)
