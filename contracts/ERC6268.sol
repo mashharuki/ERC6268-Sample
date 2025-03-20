@@ -4,15 +4,21 @@ pragma solidity ^0.8.27;
 import "./interface/IERC6268.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 /**
  * @title ERC6268 Contract
  */
-contract ERC6268 is IERC6268, ERC165 {
+contract ERC6268 is IERC6268, ERC165, ERC1155 {
   using EnumerableSet for EnumerableSet.UintSet;
 
   // ロックされたトークンIDのセット
   EnumerableSet.UintSet private lockedTokens;
+
+  /**
+   * コンストラクター
+   */
+  constructor(string memory _uri) ERC1155(_uri) {}
 
   /**
    * 特定のトークンIDがロックされているかを確認
@@ -20,6 +26,7 @@ contract ERC6268 is IERC6268, ERC165 {
   function locked(uint256 id) public view override returns (bool) {
     return lockedTokens.contains(id);
   }
+
 
   /**
    * 複数のトークンIDがすべてロックされているかを確認
@@ -75,7 +82,10 @@ contract ERC6268 is IERC6268, ERC165 {
     emit UnlockedBatch(ids);
   }
 
-  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165) returns (bool) {
+  /**
+   * supportsInterface
+   */
+  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165 , ERC1155) returns (bool) {
     return (interfaceId == type(IERC6268).interfaceId || super.supportsInterface(interfaceId));
   }
 }

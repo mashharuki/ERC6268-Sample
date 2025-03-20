@@ -1,20 +1,18 @@
 // SPDX-License-Identifier: CC0-1.0
 pragma solidity ^0.8.27;
 
-import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./ERC6268.sol";
-import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 /**
  * @title ERC1155WithLock Contract
  */
-contract ERC1155WithLock is ERC1155, ERC6268, Ownable {
+contract ERC1155WithLock is ERC6268, Ownable {
 
   /**
    * コンストラクター
    */
-  constructor(string memory uri) ERC1155(uri) Ownable(msg.sender) {}
+  constructor(string memory _uri) ERC6268(_uri)Ownable(msg.sender) {}
 
   /**
    * トークンIDをロックする（オーナーのみ実行可能）
@@ -23,7 +21,7 @@ contract ERC1155WithLock is ERC1155, ERC6268, Ownable {
     _lock(id);
   }
 
-  /**
+   /**
    * NFTをミントするメソッド
    */
   function mint(address _to, uint256 _id) public {
@@ -82,9 +80,5 @@ contract ERC1155WithLock is ERC1155, ERC6268, Ownable {
       );
     }
     super.safeBatchTransferFrom(from, to, ids, amounts, data);
-  }
-
-  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155, ERC6268) returns (bool) {
-    return super.supportsInterface(interfaceId);
   }
 }

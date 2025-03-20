@@ -1,5 +1,3 @@
-import "./lock/read";
-import "./lock/write";
 import "./nft/lock";
 import "./nft/mint";
 import "./nft/transfer";
