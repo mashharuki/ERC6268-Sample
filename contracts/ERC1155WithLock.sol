@@ -26,7 +26,7 @@ contract ERC1155WithLock is ERC1155, ERC6268, Ownable {
   /**
    * NFTをミントするメソッド
    */
-  function mint(address _to, uint256 _id) public onlyOwner {
+  function mint(address _to, uint256 _id) public {
     _mint(_to, _id, 1, "");
   }
 
