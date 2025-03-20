@@ -97,5 +97,39 @@ describe("ERC1155WithLock", () => {
       expect(await nft.read.balanceOf([owner.account.address as `0x${string}`, 0n])).to.equal(0n);
       expect(await nft.read.balanceOf([otherAccount.account.address as `0x${string}`, 0n])).to.equal(1n);
     });
+
+    // ロックされていないトークンIDは移転が成功することを確認する。
+    it("Should transfer tokens", async () => {
+      const { nft, owner, otherAccount } = await loadFixture(deployFixture);
+
+      // mint (Token ID 0 & 1)
+      await nft.write.mint([owner.account.address, 0n]);
+      await nft.write.mint([owner.account.address, 1n]);
+
+      // 残高をチェック
+      expect(await nft.read.balanceOf([owner.account.address as `0x${string}`, 0n])).to.equal(1n);
+      expect(await nft.read.balanceOf([owner.account.address as `0x${string}`, 1n])).to.equal(1n);
+
+      // トークンIDを指定して移転をロックする。
+      await nft.write.lock([0n]);
+
+      // 移転させようとしてエラーが発生することを確認する(ロックされていることを確認する)。
+      await expect(
+        // safeTransferFrom
+        nft.write.safeTransferFrom(
+          [owner.account.address, otherAccount.account.address, 0n, 1n, "0x"],
+        )
+      ).to.be.rejectedWith("Token is locked and cannot be transferred");
+
+      // トークンID 1は成功することを確認する。
+      await  // safeTransferFrom
+      nft.write.safeTransferFrom(
+        [owner.account.address, otherAccount.account.address, 1n, 1n, "0x"],
+      )
+
+      // 残高をチェック
+      expect(await nft.read.balanceOf([owner.account.address as `0x${string}`, 1n])).to.equal(0n);
+      expect(await nft.read.balanceOf([otherAccount.account.address as `0x${string}`, 1n])).to.equal(1n);
+    });
   });
 });
