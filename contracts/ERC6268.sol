@@ -3,11 +3,12 @@ pragma solidity ^0.8.27;
 
 import "./interface/IERC6268.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
+import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 /**
  * @title ERC6268 Contract
  */
-contract ERC6268 is IERC6268 {
+contract ERC6268 is IERC6268, ERC165 {
   using EnumerableSet for EnumerableSet.UintSet;
 
   // ロックされたトークンIDのセット
@@ -72,5 +73,9 @@ contract ERC6268 is IERC6268 {
       }
     }
     emit UnlockedBatch(ids);
+  }
+
+  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC165) returns (bool) {
+    return (interfaceId == type(IERC6268).interfaceId || super.supportsInterface(interfaceId));
   }
 }

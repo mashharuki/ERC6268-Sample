@@ -4,11 +4,12 @@ pragma solidity ^0.8.27;
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./ERC6268.sol";
+import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 /**
  * @title ERC1155WithLock Contract
  */
-contract ERC1155WithLock is ERC1155, Ownable, ERC6268 {
+contract ERC1155WithLock is ERC1155, ERC6268, Ownable {
 
   /**
    * コンストラクター
@@ -75,11 +76,15 @@ contract ERC1155WithLock is ERC1155, Ownable, ERC6268 {
     bytes memory data
   ) public virtual override {
     for (uint256 i = 0; i < ids.length; i++) {
-      require(
+     require(
         !locked(ids[i]),
         "One or more tokens are locked and cannot be transferred"
       );
     }
     super.safeBatchTransferFrom(from, to, ids, amounts, data);
+  }
+
+  function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155, ERC6268) returns (bool) {
+    return super.supportsInterface(interfaceId);
   }
 }
