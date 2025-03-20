@@ -41,3 +41,19 @@ ERC6268 調査用のリポジトリ
   ```bash
   bun run test
   ```
+
+- ERC1155WithLockコントラクトをデプロイする
+
+  ```bash
+  bun run deploy:ERC1155WithLockModule --network baseSepolia
+  ```
+
+- verify
+
+  ```bash
+  bun run verify chain-<チェーンID>
+  ```
+
+## デプロイしたコントラクト
+
+[baseSepolia - 0xfebc75a0e80dc910ee2535c3e11cd6a1f6cfcd1c](https://sepolia.basescan.org/address/0xfebc75a0e80dc910ee2535c3e11cd6a1f6cfcd1c)
