@@ -57,3 +57,8 @@ ERC6268 調査用のリポジトリ
 ## デプロイしたコントラクト
 
 [baseSepolia - 0xfebc75a0e80dc910ee2535c3e11cd6a1f6cfcd1c](https://sepolia.basescan.org/address/0xfebc75a0e80dc910ee2535c3e11cd6a1f6cfcd1c)
+
+## 参考文献
+
+- [EIPS6268](https://eips.ethereum.org/EIPS/eip-6268)
+- [[ERC6268] ERC1155形式のNFTをSBTにする仕組みを理解しよう！](https://qiita.com/cardene/items/5ac107681eac3328258d)
